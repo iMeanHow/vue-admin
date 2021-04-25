@@ -37,7 +37,7 @@ router.beforeEach((to, from, next) => {
             next({ ...to, replace: true });
         }
     } else {
-        if (to.path === store.user.loginPath) {
+        if (to.path === store.user.loginPath|| to.path == store.user.regPath) {
             next();
         } else {
             routerTo.path = to.path;
@@ -64,6 +64,13 @@ router.afterEach(to => {
 export function openNextPage() {
     router.replace({
         path: routerTo.path,
+        query: routerTo.query
+    })
+}
+
+export function openLoginPage() {
+    router.replace({
+        path: "/login",
         query: routerTo.query
     })
 }

@@ -47,6 +47,9 @@ export function getWeather(city: string) {
     })
 }
 
+
+
+
 /**
  * 提交表单数据
  * @param params 
@@ -64,13 +67,13 @@ export async function login(params: LoginParam) {
     return new Promise<ApiResult>(function(resolve) {
         /** 缓存信息  */
         const info: UserInfoType = {
-            name: params.username,
+            email: params.email,
             token: Math.random().toString(36).substr(2),
             userType: "",
             id: Math.random().toString(36).substr(10)
         }
         setTimeout(() => {
-            switch (info.name) {
+            switch (info.email) {
                 case store.user.testUserList[0]:
                     info.userType = "admin";
                     store.user.update(info);
@@ -84,7 +87,7 @@ export async function login(params: LoginParam) {
                     break;
 
                 default:
-                    resolve({ code: -1, msg: "账户不存在", data: null });
+                    resolve({ code: -1, msg: "user not exist", data: null });
                     break;
             }
         }, 600);
@@ -97,4 +100,14 @@ export async function login(params: LoginParam) {
     //     store.user.update(res.data);
     // }
     // return res;
+}
+
+export async function reg(params: LoginParam) {
+    // 模拟登录
+    window.console.log(params);
+    var item = {
+        email: params.email,
+        password : params.password
+     }
+    return request("POST", "/api/account/reg", params);
 }

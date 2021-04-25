@@ -7,7 +7,7 @@ const cacheName = "ModuleUser";
 function createUserInfo(): DeepReadonly<UserInfoType> {
     return {
         id: "",
-        name: "",
+        email: "",
         token: "",
         userType: "",
     }
@@ -24,6 +24,7 @@ export default class ModuleUser {
     /** 登录路由路径 */
     readonly loginPath = "/login";
 
+    readonly regPath = "/reg";
     /** 测试用户类型 */
     readonly testUserList = ["admin", "editor"];
 

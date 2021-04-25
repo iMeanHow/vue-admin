@@ -14,7 +14,7 @@ import HelloWorld from "../../components/HelloWorld.vue";
     }
 })
 export default class Home extends Vue {
-    content = "首页";
+    content = "RESA - Recipe Extract & Storage Application";
 }
 </script>
 

@@ -9,17 +9,14 @@
                     <i class="el-icon-caret-bottom" />
                 </div>
                 <el-dropdown-menu slot="dropdown">
-                    <router-link to="/profile/">
+                    <!-- <router-link to="/profile/">
                         <el-dropdown-item>个人中心</el-dropdown-item>
-                    </router-link>
+                    </router-link> -->
                     <router-link to="/">
-                        <el-dropdown-item>首页</el-dropdown-item>
+                        <el-dropdown-item>Index</el-dropdown-item>
                     </router-link>
-                    <a target="_blank" href="https://github.com/Hansen-hjs/vue-admin">
-                        <el-dropdown-item>项目地址</el-dropdown-item>
-                    </a>
                     <el-dropdown-item divided>
-                        <div @click="logout">退出登录</div>
+                        <div @click="logout">Logout</div>
                     </el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>

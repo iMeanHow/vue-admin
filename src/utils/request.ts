@@ -129,6 +129,7 @@ export default function request(
     formData?: AjaxParams["formData"],
     headers?: AjaxParams["headers"]
 ) {
+    window.console.log(url);
     return new Promise<ApiResult>(function(resolve, reject) {
         ajax({
             url: config.apiUrl + url,
@@ -138,7 +139,7 @@ export default function request(
             formData: formData,
             overtime: config.requestOvertime,
             success(res, xhr) {
-                // console.log("请求成功", res);
+                console.log("success", res);
                 const info = getResultInfo({ statusCode: xhr.status, data: res });
                 resolve(info);
             },

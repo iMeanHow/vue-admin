@@ -1,4 +1,5 @@
 import { RouteConfig } from "vue-router";
+import { ListType } from "element-ui/types/upload";
 
 /** 深层递归所有属性为可选 */
 export type DeepPartial<T> = {
@@ -66,15 +67,22 @@ export interface ApiResult {
 }
 
 export interface LoginParam {
-    username: string,
+    email: string,
     password: string
 }
+
+export interface recipeParam {
+    name: string,
+    steps: ListType,
+    details: ListType
+}
+
 
 export interface UserInfoType {
     /** 用户`id` */
     id: number | string
     /** 用户名 */
-    name: string
+    email: string
     /** 登录接口中返回的`token`字段 */
     token: string
     /** 用户类型 */

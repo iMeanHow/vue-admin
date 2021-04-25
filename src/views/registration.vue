@@ -22,19 +22,13 @@
                 </span>
             </el-form-item>
             <el-form-item>
-                <el-button :loading="loading" class="btn" type="primary" @click="onLogin(false)">LOGIN</el-button>
+                <el-button :loading="loading" class="btn" type="primary" @click="onReg(false)">Register</el-button>
             </el-form-item>
-                <router-link to="/reg">
-                    <el-button :loading="loading" class="btn" type="primary">Registration</el-button>
+                <router-link to="/login">
+                    <el-button :loading="loading" class="btn" type="primary">Have an account?</el-button>
 
                 </router-link>
 
-
-            <div class="tips flex fvertical" v-for="(item, index) in tipList" :key="index">
-                <el-button size="mini" type="success" v-copy="item">点击复制</el-button>
-                <div class="tips_text f1">账号：{{ item }} 密码 : 随便填</div>
-                <el-button size="mini" type="primary" @click="setLoginInfo(item)">一键登录</el-button>
-            </div>
         </el-form>
         <herf></herf>
         <a class="copyright" :href="tipLink">{{ tipLink }}</a>
@@ -43,9 +37,9 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { login } from "../api/common";
+import { login, reg } from "../api/common";
 import store from "../store";
-import { openNextPage } from "../router/permission";
+import { openNextPage, openLoginPage } from "../router/permission";
 
 function validateUsername(rule: any, value: string, callback: Function) {
     if (value.trim().length <= 2) {
@@ -95,29 +89,20 @@ export default class Login extends Vue {
         this.pwdType = this.pwdType === "password" ? "text" : "password";
     }
 
-    /**
-     * 一键登录
-     * @param account 账号
-     */
-    setLoginInfo(account: string) {
-        this.loginForm.email = account;
-        this.loginForm.password = Math.random().toString(36).substr(2);
-        this.onLogin(true);
-    }
 
     /** 
      * 点击登录 
      * @param adopt 是否不校验直接通过
     */
-    onLogin(adopt: boolean) {
+    onReg(adopt: boolean) {
         const elementForm: any = this.$refs["loginFormEl"];
         const start = async () => {
             this.loading = true;
-            // console.log("用户登录信息：", this.loginForm);
-            const res = await login(this.loginForm);
+            window.console.log("reg info：", this.loginForm);
+            const res = await reg(this.loginForm);
             this.loading = false;
-            if (res.code === 1) {
-                openNextPage();
+            if (res.code === 200) {
+                openLoginPage();
             } else {
                 this.$message.error(res.msg);
             }

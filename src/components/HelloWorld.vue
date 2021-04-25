@@ -1,15 +1,10 @@
 <template>
     <div class="hello_world">
         <h1 class="title">{{ msg }}</h1>
-        <el-divider content-position="left">vue 2.x</el-divider>
-        <p class="text"><el-link type="primary" :href="typeScript" target="_blank">typescript</el-link>+<el-link type="primary" :href="elementUi" target="_blank">element-ui</el-link>后台管理模板。</p>
-        <p class="text">考虑到兼容、使用数量、稳定等问题，当前项目搭建还是使用<el-link type="success" :href="vueCli" target="_blank">vue-cli</el-link>而没有使用<el-link type="success" :href="vite" target="_blank">vite</el-link>，等之后<el-link type="success" :href="vite" target="_blank">vite</el-link>稳定了再迁移过去。</p>
-        <p class="text">项目地址：<el-link type="primary" :href="project" target="_blank">github</el-link></p>
-        <el-divider content-position="left">打赏一下</el-divider>
-        <div class="code_box">
-            <img class="hovercode" src="https://huangjingsheng.gitee.io/hjs/images/wxcode1.jpg">
-            <img class="qrcode" src="https://huangjingsheng.gitee.io/hjs/images/wxcode2.jpg">
-        </div>
+        <el-divider content-position="left">RESA</el-divider>
+        <p class="text">Frameworks: <el-link type="success" :href="vueCli" target="_blank">vue-cli</el-link></p>
+        <p class="text">Template Source：<el-link type="primary" :href="project" target="_blank">github</el-link></p>
+
     </div>
 </template>
 

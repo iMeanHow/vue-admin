@@ -11,12 +11,12 @@ export class ModuleConfig {
 
     /** 开发环境 */
     protected readonly dev = {
-        api: "http://wthrcdn.etouch.cn"
+        api: "http://localhost:8080"
     }
     
     /** 生产环境 */
     protected readonly prod = {
-        api: "http://wthrcdn.etouch.cn"
+        api: "http://localhost:8080"
     }
 
     /** `api`请求域名 */
