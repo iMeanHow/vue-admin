@@ -4,7 +4,8 @@ import store from "../store";
 import { 
     ApiResult,
     LoginParam,
-    UserInfoType
+    UserInfoType,
+    RegParam
 } from "../utils/interfaces";
 
 /**
@@ -20,7 +21,8 @@ export function uploadImg(fromData: File) {
                 resolve({
                     status: 1,
                     data: { img: reader.result },
-                    msg: "上传成功"
+                    msg: "上传成功",
+                    payload: ""
                 })
             }, 500);
         }
@@ -28,7 +30,8 @@ export function uploadImg(fromData: File) {
             resolve({
                 status: -1,
                 data: null,
-                msg: "上传失败"
+                msg: "上传失败",
+                payload: ""
             })
         }
         reader.readAsDataURL(fromData);
@@ -64,34 +67,56 @@ export function submitForm(params: { id: number, name: string, age: number }) {
  */
 export async function login(params: LoginParam) {
     // 模拟登录
-    return new Promise<ApiResult>(function(resolve) {
-        /** 缓存信息  */
-        const info: UserInfoType = {
-            email: params.email,
-            token: Math.random().toString(36).substr(2),
-            userType: "",
-            id: Math.random().toString(36).substr(10)
-        }
-        setTimeout(() => {
-            switch (info.email) {
-                case store.user.testUserList[0]:
-                    info.userType = "admin";
-                    store.user.update(info);
-                    resolve({ status: 1, msg: "ok", data: info });
-                    break;
+    params.rememberMe=0;
 
-                case store.user.testUserList[1]:
-                    info.userType = "editor";
-                    store.user.update(info);
-                    resolve({ status: 1, msg: "ok", data: info });
-                    break;
+    var v = request("POST", "/api/account/login", params);
+    console.log("payload= "+(await v).payload);
+    console.log("token= "+(await v).payload.token);
+    
+    const info: UserInfoType = {
+        email: params.email,
+        token: (await v).payload.token,
+        userType: "admin",
+        id: Math.random().toString(36).substr(10)
+    }
+    store.user.update(info);
+    return v;
+    // return new Promise<ApiResult>(function(resolve) {
 
-                default:
-                    resolve({ status: -1, msg: "user not exist", data: null });
-                    break;
-            }
-        }, 600);
-    })
+    //     params.rememberMe=0;
+    //     const loginRes = request("POST", "/api/account/login", params);
+    //     console.log("login request posted!");
+        
+    //     /** 缓存信息  */
+    //     const info: UserInfoType = {
+    //         email: params.email,
+    //         token: Math.random().toString(36).substr(2),
+    //         userType: "",
+    //         id: Math.random().toString(36).substr(10)
+    //     }
+    //     console.log(loginRes);
+    //     setTimeout(() => {
+    //         switch (info.email) {
+    //             case store.user.testUserList[0]:
+    //                 info.userType = "admin";
+    //                 store.user.update(info);
+    //                 resolve({ status: 1, msg: "ok", data: info });
+    //                 break;
+
+    //             case store.user.testUserList[1]:
+    //                 info.userType = "editor";
+    //                 store.user.update(info);
+    //                 resolve({ status: 1, msg: "ok", data: info });
+    //                 break;
+
+    //             default:
+    //                 resolve({ status: -1, msg: "user not exist", data: null });
+    //                 break;
+    //         }
+    //     }, 600);
+    // })
+    
+    
     
     // const res = await request("POST", "/login", params)
     // if (res.code === 1) {
@@ -102,12 +127,8 @@ export async function login(params: LoginParam) {
     // return res;
 }
 
-export async function reg(params: LoginParam) {
+export async function reg(params: RegParam) {
     // 模拟登录
     window.console.log(params);
-    var item = {
-        email: params.email,
-        password : params.password
-     }
     return request("POST", "/api/account/reg", params);
 }

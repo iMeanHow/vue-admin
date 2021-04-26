@@ -87,7 +87,8 @@ function ajax(params: AjaxParams) {
 }
 
 function getResultInfo(result: { statusCode: number, data: any }) {
-    const info: ApiResult = { status: -1, msg: "网络出错了", data: null }
+    const info: ApiResult = { status: -1, msg: "网络出错了", data: null, payload: null }
+    console.log("result=" + result);
     switch (result.statusCode) {
         case config.requestOvertime:
             info.msg = "网络超时了";
@@ -96,6 +97,7 @@ function getResultInfo(result: { statusCode: number, data: any }) {
             info.status = 1;
             info.msg = "ok";
             info.data = result.data;
+            info.payload=result.data.payload;
             break;
         case 400:
             info.msg = "接口传参不正确";
@@ -129,7 +131,7 @@ export default function request(
     formData?: AjaxParams["formData"],
     headers?: AjaxParams["headers"]
 ) {
-    window.console.log(url);
+    console.log(url);
     return new Promise<ApiResult>(function(resolve, reject) {
         ajax({
             url: config.apiUrl + url,
@@ -139,7 +141,7 @@ export default function request(
             formData: formData,
             overtime: config.requestOvertime,
             success(res, xhr) {
-                console.log("success", res);
+                console.log("==success==", res);
                 const info = getResultInfo({ statusCode: xhr.status, data: res });
                 resolve(info);
             },

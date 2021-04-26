@@ -104,6 +104,7 @@ export default class Login extends Vue {
             console.log("registration finished")
             console.log(res)
             if (res.status === 1) {
+                this.$message("success");
                 openLoginPage();
             } else {
                 this.$message.error(res.msg);

@@ -30,11 +30,11 @@
                 </router-link>
 
 
-            <div class="tips flex fvertical" v-for="(item, index) in tipList" :key="index">
+            <!-- <div class="tips flex fvertical" v-for="(item, index) in tipList" :key="index">
                 <el-button size="mini" type="success" v-copy="item">点击复制</el-button>
                 <div class="tips_text f1">账号：{{ item }} 密码 : 随便填</div>
                 <el-button size="mini" type="primary" @click="setLoginInfo(item)">一键登录</el-button>
-            </div>
+            </div> -->
         </el-form>
         <a class="copyright" :href="tipLink">{{ tipLink }}</a>
     </div>
@@ -76,7 +76,8 @@ export default class Login extends Vue {
     /** 登录信息 */
     loginForm = {
         email: "",
-        password: ""
+        password: "",
+        rememberMe: 0
     }
     loginRules = {
         email: [
@@ -114,8 +115,12 @@ export default class Login extends Vue {
             this.loading = true;
             // console.log("用户登录信息：", this.loginForm);
             const res = await login(this.loginForm);
+            console.log("log request posted");
+            console.log("data= " + res.status);
+
             this.loading = false;
             if (res.status === 1) {
+                console.log("login success");
                 openNextPage();
             } else {
                 this.$message.error(res.msg);

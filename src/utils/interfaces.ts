@@ -64,9 +64,16 @@ export interface ApiResult {
     data: any
     /** 接口响应信息 */
     msg: string
+    payload: any
 }
 
 export interface LoginParam {
+    email: string,
+    password: string,
+    rememberMe: number
+}
+
+export interface RegParam {
     email: string,
     password: string
 }

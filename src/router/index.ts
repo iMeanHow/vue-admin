@@ -59,20 +59,20 @@ export const admin: Array<RouteItem> = [
         ]
     },
     {
-        path: "/column",
-        name: "column",
-        redirect: "/column/column-1",
+        path: "/myRecipe",
+        name: "myRecipe",
+        redirect: "/myRecipe/column-1",
         meta: { title: "My Recipe", icon: "dashboard" }, 
         component: Layout,
         children: [
             {
                 path: "menu-1",
-                name: "nested/menu-1",
+                name: "myRecipe/menu-1",
                 meta: { title: "View All", icon: "tree" },
                 component: () => import("@/views/pages/menu-1.vue")
             }, {
                 path: "menu-2",
-                name: "nested/menu-2",
+                name: "myRecipe/menu-2",
                 meta: { title: "Update Recipe", icon: "tree" },
                 component: () => import("@/views/pages/menu-2.vue")
             }
@@ -81,20 +81,20 @@ export const admin: Array<RouteItem> = [
 
 
     {
-        path: "/column",
-        name: "column",
-        redirect: "/column/column-1",
+        path: "/newRecipe",
+        name: "newRecipe",
+        redirect: "/newRecipe/column-1",
         meta: { title: "New Recipe", icon: "dashboard" }, 
         component: Layout,
         children: [
             {
                 path: "column-1",
-                name: "column/column-1",
+                name: "newRecipe/column-1",
                 meta: { title: "Manual Input", icon: "theme" },
                 component: () => import("@/views/pages/column-1.vue"),
             }, {
                 path: "column-2",
-                name: "column/column-2",
+                name: "newRecipe/column-2",
                 meta: { title: "URL Extract", icon: "table" },
                 component: () => import("@/views/pages/column-2.vue")
             }
