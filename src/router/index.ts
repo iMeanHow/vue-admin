@@ -103,13 +103,13 @@ export const admin: Array<RouteItem> = [
     {
         path: "/request",
         name: "request",
-        redirect: "/request/weather",
-        meta: { title: "http请求", icon: "guide" },
+        redirect: "/request/search_recipe",
+        meta: { title: "Recipe", icon: "guide" },
         component: Layout,
         children: [
             {
-                path: "weather",
-                name: "request/weather",
+                path: "search_recipe",
+                name: "request/search_recipe",
                 meta: { title: "Recipe Search", icon: "international" },
                 component: () => import("@/views/pages/http.vue"),
             }

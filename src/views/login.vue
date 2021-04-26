@@ -36,7 +36,6 @@
                 <el-button size="mini" type="primary" @click="setLoginInfo(item)">一键登录</el-button>
             </div>
         </el-form>
-        <herf></herf>
         <a class="copyright" :href="tipLink">{{ tipLink }}</a>
     </div>
 </template>
