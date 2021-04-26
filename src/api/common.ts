@@ -18,7 +18,7 @@ export function uploadImg(fromData: File) {
         reader.onload = function() {
             setTimeout(function() {
                 resolve({
-                    code: 1,
+                    status: 1,
                     data: { img: reader.result },
                     msg: "上传成功"
                 })
@@ -26,7 +26,7 @@ export function uploadImg(fromData: File) {
         }
         reader.onerror = function() {
             resolve({
-                code: -1,
+                status: -1,
                 data: null,
                 msg: "上传失败"
             })
@@ -77,17 +77,17 @@ export async function login(params: LoginParam) {
                 case store.user.testUserList[0]:
                     info.userType = "admin";
                     store.user.update(info);
-                    resolve({ code: 1, msg: "ok", data: info });
+                    resolve({ status: 1, msg: "ok", data: info });
                     break;
 
                 case store.user.testUserList[1]:
                     info.userType = "editor";
                     store.user.update(info);
-                    resolve({ code: 1, msg: "ok", data: info });
+                    resolve({ status: 1, msg: "ok", data: info });
                     break;
 
                 default:
-                    resolve({ code: -1, msg: "user not exist", data: null });
+                    resolve({ status: -1, msg: "user not exist", data: null });
                     break;
             }
         }, 600);

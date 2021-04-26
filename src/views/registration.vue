@@ -101,7 +101,9 @@ export default class Login extends Vue {
             window.console.log("reg info：", this.loginForm);
             const res = await reg(this.loginForm);
             this.loading = false;
-            if (res.code === 200) {
+            console.log("registration finished")
+            console.log(res)
+            if (res.status === 1) {
                 openLoginPage();
             } else {
                 this.$message.error(res.msg);

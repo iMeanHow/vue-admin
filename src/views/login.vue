@@ -116,7 +116,7 @@ export default class Login extends Vue {
             // console.log("用户登录信息：", this.loginForm);
             const res = await login(this.loginForm);
             this.loading = false;
-            if (res.code === 1) {
+            if (res.status === 1) {
                 openNextPage();
             } else {
                 this.$message.error(res.msg);

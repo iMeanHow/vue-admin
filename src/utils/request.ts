@@ -87,13 +87,13 @@ function ajax(params: AjaxParams) {
 }
 
 function getResultInfo(result: { statusCode: number, data: any }) {
-    const info: ApiResult = { code: -1, msg: "网络出错了", data: null }
+    const info: ApiResult = { status: -1, msg: "网络出错了", data: null }
     switch (result.statusCode) {
         case config.requestOvertime:
             info.msg = "网络超时了";
             break;
         case 200:
-            info.code = 1;
+            info.status = 1;
             info.msg = "ok";
             info.data = result.data;
             break;
