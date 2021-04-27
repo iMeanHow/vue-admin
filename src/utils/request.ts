@@ -4,6 +4,7 @@ import {
     AjaxParams, 
     ApiResult
 } from "./interfaces";
+import store from '@/store';
 
 /**
  * `http`请求
@@ -111,7 +112,7 @@ function getResultInfo(result: { statusCode: number, data: any }) {
             break;
     }
     if (result.statusCode >= 500) {
-        info.msg = "服务器闹脾气了";
+        info.msg = "Internal error";
     }
     return info;
 }
@@ -132,6 +133,9 @@ export default function request(
     headers?: AjaxParams["headers"]
 ) {
     console.log(url);
+    if(store.user.info.token!=null){
+        headers={Authorization:store.user.info.token}
+    }
     return new Promise<ApiResult>(function(resolve, reject) {
         ajax({
             url: config.apiUrl + url,

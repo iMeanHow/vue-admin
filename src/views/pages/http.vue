@@ -6,7 +6,7 @@
                 <el-button type="warning" size="small" @click="openHttp()">切换至http</el-button>
             </div>
             <div class="flex fvertical mrb_20">
-                <el-input v-model="pageData.city" clearable placeholder="请输入城市名" style="width: 300px; margin-right: 16px;"></el-input>
+                <el-input v-model="pageData.recipe" clearable placeholder="enter recipe name" style="width: 300px; margin-right: 16px;"></el-input>
                 <el-button type="primary" @click="getData()" :loading="pageData.loading" >
                     <svg-icon v-show="pageData.loading" name="international" />
                     <span style="padding-left: 8px;">Recipe Search</span>
@@ -26,12 +26,12 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { getWeather } from "../../api/common";
+import { getWeather, searchRecipe } from "../../api/common";
 
 @Component({})
 export default class HttpRequest extends Vue {
     readonly pageData = {
-        city: "Recipe 1",
+        recipe: "",
         loading: false,
         showTable: true,
         content: "",
@@ -41,30 +41,28 @@ export default class HttpRequest extends Vue {
     }
 
     readonly tableColumns = [
-        { label: "Name", prop: "date", minWidth: "", width: 120 },
-        { label: "column1", prop: "high", minWidth: "", width: 120 },
-        { label: "column2", prop: "low", minWidth: "", width: 120 },
-        { label: "column3", prop: "fengli", minWidth: 140, width: "" },
-        { label: "column4", prop: "fengxiang", minWidth: 140, width: "" },
-        { label: "column5", prop: "type", minWidth: 140, width: "" },
+        { label: "id", prop: "id", minWidth: "", width: 100 },
+        { label: "title", prop: "title", minWidth: "", width: 500 },
+        { label: "description", prop: "description", minWidth: "", width: 700 }
     ]
 
     async getData() {
-        if (!this.pageData.city) return this.$message.warning("recipe name");
+        if (!this.pageData.recipe) return this.$message.warning("null recipe name");
         this.pageData.loading = true;
-        const res = await getWeather(this.pageData.city)
+        const res = await searchRecipe(this.pageData.recipe)
         this.pageData.loading = false;
-        console.log("获取天气预报数据 >>", res);
+        console.log("my recipse >>", res);
         if (res.status === 1) {
-            if (res.data.status === 1000) {
-                this.pageData.content = JSON.stringify(res.data, null, 4);
-                this.pageData.tableData = res.data.data.forecast;
-                this.pageData.desc = res.data.data.ganmao;
+             console.log("======= " +res.data.data.content);
+            if (res.data.payload.status === 200) {
+                this.pageData.content = JSON.stringify(res.data, null, 100);
+                this.pageData.tableData = res.data.data.content;
+                this.pageData.desc = "query success";
             } else {
                 this.$message.error(res.data.desc);
             }
         } else {
-            this.$message.error("Network error");
+            this.$message.error("network error");
         }
     }
         

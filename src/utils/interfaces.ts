@@ -78,10 +78,29 @@ export interface RegParam {
     password: string
 }
 
-export interface recipeParam {
-    name: string,
-    steps: ListType,
-    details: ListType
+export interface SearchParam {
+    keyword: string
+}
+
+export interface ExtractParam {
+    url: string
+}
+
+
+
+export interface RecipeParam {
+    title: string,
+    description: string,
+    steps: {
+        detail: string
+    }[],
+    ingrediants:{
+        detail: string
+    }[],
+    comments: {
+        comment: string,
+        rating: number,
+    }[]
 }
 
 

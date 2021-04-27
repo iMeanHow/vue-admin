@@ -5,7 +5,10 @@ import {
     ApiResult,
     LoginParam,
     UserInfoType,
-    RegParam
+    RegParam,
+    SearchParam,
+    ExtractParam,
+    RecipeParam
 } from "../utils/interfaces";
 
 /**
@@ -50,7 +53,11 @@ export function getWeather(city: string) {
     })
 }
 
-
+export function searchRecipe(recipeName: string) {
+    return request("GET", "/api/recipe/search", {
+        keyword: recipeName
+    })
+}
 
 
 /**
@@ -70,7 +77,7 @@ export async function login(params: LoginParam) {
     params.rememberMe=0;
 
     var v = request("POST", "/api/account/login", params);
-    console.log("payload= "+(await v).payload);
+    console.log("payl= "+(await v).payload);
     console.log("token= "+(await v).payload.token);
     
     const info: UserInfoType = {
@@ -128,7 +135,23 @@ export async function login(params: LoginParam) {
 }
 
 export async function reg(params: RegParam) {
-    // 模拟登录
     window.console.log(params);
     return request("POST", "/api/account/reg", params);
+}
+
+export async function extract(url: ExtractParam) {
+    console.log("url =:" + url);
+    return request("POST", "/api/recipe/import",url);
+}
+
+
+
+export async function createRecipe(param: RecipeParam) {
+    console.log("create param =:" + param);
+    return request("POST", "/api/recipe/create",param);
+}
+
+export async function viewMine() {
+    console.log("view my recipes");
+    return request("GET", "/api/recipe/mine");
 }
