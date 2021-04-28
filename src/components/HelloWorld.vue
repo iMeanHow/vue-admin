@@ -2,8 +2,8 @@
     <div class="hello_world">
         <h1 class="title">{{ msg }}</h1>
         <el-divider content-position="left">RESA</el-divider>
-        <p class="text">Frameworks: <el-link type="success" :href="vueCli" target="_blank">vue-cli</el-link></p>
-        <p class="text">Template Source：<el-link type="primary" :href="project" target="_blank">github</el-link></p>
+        <p class="text">Course Project for CSC 510 - 2021 Spring</p>
+        <p class="text">A recipe extract and storage system.</p>
 
     </div>
 </template>

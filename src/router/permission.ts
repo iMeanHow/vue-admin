@@ -86,12 +86,12 @@ export function openLoginPage() {
 }
 
 export function toUpdate(s:number) {
-    var a={id:s} as any;
+    routerTo.query=s;
     router.replace({
         path: "/myRecipe/menu-2",
         query: {}
     })
-    routerTo.query=s;
+    
 }
 
 

@@ -124,7 +124,6 @@ export default class Column1 extends Vue {
     }
     async create() {
         console.log("manual input");
-        const elementForm: any = this.$refs["extractFormEl"];
         console.log("manual input = ",this.createForm);
         const res = await createRecipe(this.createForm);
         console.log("manual input post request ");

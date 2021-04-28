@@ -92,7 +92,7 @@ function getResultInfo(result: { statusCode: number, data: any }) {
     console.log("result=" + result);
     switch (result.statusCode) {
         case config.requestOvertime:
-            info.msg = "网络超时了";
+            info.msg = "Netwrok Timeout";
             break;
         case 200:
             info.status = 1;
@@ -101,12 +101,12 @@ function getResultInfo(result: { statusCode: number, data: any }) {
             info.payload=result.data.payload;
             break;
         case 400:
-            info.msg = "接口传参不正确";
+            info.msg = "Wrong Params";
         case 403:
-            info.msg = "登录已过期";
+            info.msg = "403";
             break;
         case 404:
-            info.msg = "接口不存在";
+            info.msg = "404";
             break;
         default:
             break;

@@ -18,8 +18,9 @@
                 <el-table-column label="operation">
 
                 <template slot-scope="scope">
+                <el-button type="primary" @click="update(scope.row)">update</el-button>
                 <el-button type="danger" @click="del(scope.row.id)">delete</el-button>
-                <el-button type="primary" @click="update(scope.row.id)">update</el-button>
+                
                 </template>
                 </el-table-column>
                 </el-table>
@@ -33,11 +34,14 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { extract, viewMine, deleteRecipe } from '../../api/common';
-import { toUpdate } from '../../router/permission';
+import { toUpdate, toDetail } from '../../router/permission';
 @Component({})
 export default class Menu1 extends Vue {
     content = "My Recipes"
-
+	mounted(){   
+        this.getData();
+		
+	}
     readonly pageData = {
         city: "Recipe Name",
         loading: false,
@@ -96,7 +100,7 @@ export default class Menu1 extends Vue {
     }
     
     async update(id:number) {
-         
+        console.log("to update id ",id);
         toUpdate(id);
         
     }

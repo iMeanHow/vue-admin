@@ -103,6 +103,27 @@ export interface RecipeParam {
     }[]
 }
 
+export interface updateRecipeParam {
+    id:number,
+    title: string,
+    description: string,
+    steps: {
+        detail: string
+    }[],
+    ingrediants:{
+        detail: string
+    }[],
+    comments: {
+        comment: string,
+        rating: number,
+    }[]
+}
+
+export interface CommentParam{
+    id:number,
+    rating: string,
+    text:string
+}
 
 export interface UserInfoType {
     /** 用户`id` */

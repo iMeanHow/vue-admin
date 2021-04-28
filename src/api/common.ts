@@ -8,8 +8,11 @@ import {
     RegParam,
     SearchParam,
     ExtractParam,
-    RecipeParam
+    RecipeParam,
+    CommentParam,
+    updateRecipeParam
 } from "../utils/interfaces";
+import { getRouterQuery } from '@/router/permission';
 
 /**
  * 上传图片
@@ -151,17 +154,29 @@ export async function createRecipe(param: RecipeParam) {
     return request("POST", "/api/recipe/create",param);
 }
 
+export async function updateRecipe(param: updateRecipeParam) {
+    
+    console.log("update param =:" + param);
+    return request("POST", "/api/recipe/update",param);
+}
+
+export async function commentRecipe(param: CommentParam) {
+    console.log("create comment =:" + param);
+   
+    return request("POST", "/api/recipe/comment",param);
+}
+
 export async function viewMine() {
     console.log("view my recipes");
     return request("GET", "/api/recipe/mine");
 }
 
 export async function deleteRecipe(s:number) {
-    console.log("view my recipes");
+    console.log("delete my recipe");
     return request("GET", "/api/recipe/delete",{'id':s});
 }
 
 export async function detailRecipe(s:number) {
-    console.log("view my recipes");
+    console.log("view recipes");
     return request("GET", "/api/recipe/lookup",{'id':s});
 }
