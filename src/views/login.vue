@@ -65,7 +65,7 @@ function validatePass(rule: any, value: string, callback: Function) {
 @Component({})
 export default class Login extends Vue {
     title = "RESA";
-    tipLink = "https://github.com/Hansen-hjs";
+    tipLink = "https://github.com/iMeanhow";
     tipList = store.user.testUserList;
 
     /** 背景信息 */

@@ -7,7 +7,7 @@
                     <svg-icon v-show="pageData.loading" name="international" />
                     <span style="padding-left: 8px;">Show My Recipes</span>
                 </el-button>
-                <el-button type="success" icon="el-icon-document" v-if="pageData.content" v-copy="pageData.content">COPY</el-button>
+                <!-- <el-button type="success" icon="el-icon-document" v-if="pageData.content" v-copy="pageData.content">COPY</el-button> -->
                 <el-switch v-model="pageData.showTable" active-text="Show in Form"  style="margin-left: 16px;"></el-switch>
             </div>
             <template v-if="pageData.showTable">
