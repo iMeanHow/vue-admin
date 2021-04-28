@@ -155,3 +155,8 @@ export async function viewMine() {
     console.log("view my recipes");
     return request("GET", "/api/recipe/mine");
 }
+
+export async function deleteRecipe(s:number) {
+    console.log("view my recipes");
+    return request("GET", "/api/recipe/delete",{'id':s});
+}

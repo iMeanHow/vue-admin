@@ -18,6 +18,8 @@
                 <el-tag class="mrb_20" type="warning" v-show="pageData.desc">{{ pageData.desc }}</el-tag>
                 <el-table :data="pageData.tableData" border stripe>
                     <el-table-column v-for="item in tableColumns" :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :min-width="item.minWidth" align="center"></el-table-column>
+                    
+<el-button type="danger"  @click="del(scope.row)">删除</el-button>
                 </el-table>
             </template>
             <el-input type="textarea" autosize placeholder="Result" v-model="pageData.content" v-else></el-input>
@@ -42,8 +44,8 @@ export default class HttpRequest extends Vue {
 
     readonly tableColumns = [
         { label: "id", prop: "id", minWidth: "", width: 100 },
-        { label: "title", prop: "title", minWidth: "", width: 500 },
-        { label: "description", prop: "description", minWidth: "", width: 700 }
+        { label: "title", prop: "title", minWidth: "", width: 400 },
+        { label: "description", prop: "description", minWidth: "", width: 600 }
     ]
 
     async getData() {
@@ -51,12 +53,21 @@ export default class HttpRequest extends Vue {
         this.pageData.loading = true;
         const res = await searchRecipe(this.pageData.recipe)
         this.pageData.loading = false;
-        console.log("my recipse >>", res);
+        var content=res.data.data.content;
+
+        var v=[{
+                 id:Number,
+                 title:String,
+                 description:String
+             }] as never[]
+        for(var i = 0; i < content.length; i++){
+            v[i]={id:content[i][0],title:content[i][1],description:content[i][2]} as never
+        }
+
         if (res.status === 1) {
-             console.log("======= " +res.data.data.content);
             if (res.data.payload.status === 200) {
                 this.pageData.content = JSON.stringify(res.data, null, 100);
-                this.pageData.tableData = res.data.data.content;
+                this.pageData.tableData = v;
                 this.pageData.desc = "query success";
             } else {
                 this.$message.error(res.data.desc);

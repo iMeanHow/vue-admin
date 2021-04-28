@@ -84,3 +84,16 @@ export function openLoginPage() {
         query: routerTo.query
     })
 }
+
+export function toUpdate(s:number) {
+    var a={id:s} as any;
+    router.replace({
+        path: "/myRecipe/menu-2",
+        query: {}
+    })
+    routerTo.query=s;
+}
+
+export function getRouterQuery() {
+    return routerTo.query;
+}

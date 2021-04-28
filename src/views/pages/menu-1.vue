@@ -18,12 +18,12 @@
                 <el-tag class="mrb_20" type="warning" v-show="pageData.desc">{{ pageData.desc }}</el-tag>
                 <el-table :data="pageData.tableData" border stripe>
                     
-                    <el-table-column v-for="item in tableColumns" :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :min-width="item.minWidth" align="center"></el-table-column>
+                <el-table-column v-for="item in tableColumns" :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :min-width="item.minWidth" align="center"></el-table-column>
                 <el-table-column label="operation">
 
                 <template slot-scope="scope">
                 <el-button type="primary" @click="del(scope.row.id)">delete</el-button>
-                <el-button type="primary" @click="detail(scope.row.id)">detail</el-button>
+                <el-button type="primary" @click="update(scope.row.id)">update</el-button>
                 </template>
                 </el-table-column>
                 </el-table>
@@ -36,7 +36,8 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { extract, viewMine } from '../../api/common';
+import { extract, viewMine, deleteRecipe } from '../../api/common';
+import { toUpdate } from '../../router/permission';
 @Component({})
 export default class Menu1 extends Vue {
     content = "My Recipes"
@@ -53,8 +54,8 @@ export default class Menu1 extends Vue {
 
     readonly tableColumns = [
         { label: "id", prop: "id", minWidth: "", width: 100 },
-        { label: "title", prop: "title", minWidth: "", width: 500 },
-        { label: "description", prop: "description", minWidth: "", width: 700 }
+        { label: "title", prop: "title", minWidth: "", width: 400 },
+        { label: "description", prop: "description", minWidth: "", width: 600 }
         // { label: "steps", prop: "steps", minWidth: "", width: 120 },
         // { label: "ingrediants", prop: "ingrediants", minWidth: 140, width: "" },
         // { label: "comments", prop: "comments", minWidth: 140, width: "" },
@@ -65,12 +66,22 @@ export default class Menu1 extends Vue {
         this.pageData.loading = true;
         const res = await viewMine()
         this.pageData.loading = false;
-        console.log("my recipse >>", res);
+        // console.log("my recipse >>", res);
         if (res.status === 1) {
-             console.log("======= " +res.data.data.content);
+             
+             var content=res.data.data.content;
+             var v=[{
+                 id:Number,
+                 title:String,
+                 description:String
+             }] as never[]
+            for(var i = 0; i < content.length; i++){
+                v[i]={id:content[i][0],title:content[i][1],description:content[i][2]} as never
+            }
+
             if (res.data.payload.status === 200) {
-                this.pageData.content = JSON.stringify(res.data, null, 100);
-                this.pageData.tableData = res.data.data.content;
+                this.pageData.content = JSON.stringify(res.data.data, null, 100);
+                this.pageData.tableData =v;
                 this.pageData.desc = "query success";
             } else {
                 this.$message.error(res.data.desc);
@@ -81,10 +92,19 @@ export default class Menu1 extends Vue {
     }
         
     async del(id:number) {
-         this.$message(""+id);
+         
         this.pageData.loading = true;
+        const res = await deleteRecipe(id);
+        console.log("delete result",res);
+        this.getData() ;
     }
+    
+    async update(id:number) {
+         
+        toUpdate(id);
         
+    }
+    
 }
 </script>
 
