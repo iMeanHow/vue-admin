@@ -94,6 +94,15 @@ export function toUpdate(s:number) {
     routerTo.query=s;
 }
 
+
+export function toDetail(s:number) {
+    router.replace({
+        path: "/request/recipe_detail",
+        query: {}
+    })
+    routerTo.query=s;
+}
+
 export function getRouterQuery() {
     return routerTo.query;
 }

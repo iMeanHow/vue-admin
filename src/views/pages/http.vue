@@ -1,10 +1,10 @@
 <template>
     <div class="http_request">
         <el-card>
-            <div class="mrb_20" v-if="pageData.showTip">
+            <!-- <div class="mrb_20" v-if="pageData.showTip">
                 <el-tag type="danger" style="margin-right: 14px;">请求接口为http，与当前域名https不匹配，可能无法正常请求到数据，需要在http环境下进行</el-tag>
                 <el-button type="warning" size="small" @click="openHttp()">切换至http</el-button>
-            </div>
+            </div> -->
             <div class="flex fvertical mrb_20">
                 <el-input v-model="pageData.recipe" clearable placeholder="enter recipe name" style="width: 300px; margin-right: 16px;"></el-input>
                 <el-button type="primary" @click="getData()" :loading="pageData.loading" >
@@ -16,11 +16,15 @@
             </div>
             <template v-if="pageData.showTable">
                 <el-tag class="mrb_20" type="warning" v-show="pageData.desc">{{ pageData.desc }}</el-tag>
-                <el-table :data="pageData.tableData" border stripe>
+            <el-table :data="pageData.tableData" border stripe>
                     <el-table-column v-for="item in tableColumns" :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :min-width="item.minWidth" align="center"></el-table-column>
-                    
-<el-button type="danger"  @click="del(scope.row)">删除</el-button>
-                </el-table>
+            <el-table-column label="operation">
+
+                <template slot-scope="scope">
+            <el-button type="primary"  @click="detail(scope.row)">Detail</el-button>
+                </template>
+            </el-table-column>
+            </el-table>
             </template>
             <el-input type="textarea" autosize placeholder="Result" v-model="pageData.content" v-else></el-input>
         </el-card>
@@ -29,6 +33,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { getWeather, searchRecipe } from "../../api/common";
+import { toUpdate, toDetail } from '../../router/permission';
 
 @Component({})
 export default class HttpRequest extends Vue {
@@ -86,6 +91,11 @@ export default class HttpRequest extends Vue {
         if (location.origin.includes("https")) {
             this.pageData.showTip = true;
         }
+    }
+    async detail(id:number) {
+         
+        toDetail(id);
+        
     }
 }
 </script>

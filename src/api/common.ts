@@ -160,3 +160,8 @@ export async function deleteRecipe(s:number) {
     console.log("view my recipes");
     return request("GET", "/api/recipe/delete",{'id':s});
 }
+
+export async function detailRecipe(s:number) {
+    console.log("view my recipes");
+    return request("GET", "/api/recipe/lookup",{'id':s});
+}

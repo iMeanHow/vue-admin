@@ -159,7 +159,7 @@ export default function request(
                 resolve(info);
             },
             timeout() {
-                console.warn("XMLHttpRequest 请求超时 !!!");
+                console.warn("XMLHttpRequest timeout !!!");
                 const info = getResultInfo({ statusCode: config.requestOvertime, data: null });
                 // 全局的请求超时提示，不需要可以去掉
                 Message.warning(info.msg);

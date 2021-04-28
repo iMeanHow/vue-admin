@@ -2,10 +2,6 @@
     <div class="menu-1">
         <el-alert :closable="false" :title="content" type="success" effect="dark" />
         <el-card>
-            <!-- <div class="mrb_20" v-if="pageData.showTip">
-                <el-tag type="danger" style="margin-right: 14px;">请求接口为http，与当前域名https不匹配，可能无法正常请求到数据，需要在http环境下进行</el-tag>
-                <el-button type="warning" size="small" @click="openHttp()">切换至http</el-button>
-            </div> -->
             <div class="flex fvertical mrb_20">
                 <el-button type="primary" @click="getData()" :loading="pageData.loading" >
                     <svg-icon v-show="pageData.loading" name="international" />
@@ -22,7 +18,7 @@
                 <el-table-column label="operation">
 
                 <template slot-scope="scope">
-                <el-button type="primary" @click="del(scope.row.id)">delete</el-button>
+                <el-button type="danger" @click="del(scope.row.id)">delete</el-button>
                 <el-button type="primary" @click="update(scope.row.id)">update</el-button>
                 </template>
                 </el-table-column>

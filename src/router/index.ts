@@ -112,9 +112,30 @@ export const admin: Array<RouteItem> = [
                 name: "request/search_recipe",
                 meta: { title: "Recipe Search", icon: "international" },
                 component: () => import("@/views/pages/http.vue"),
+            },
+            {
+                path: "recipe_detail",
+                name: "request/recipe_detail",
+                meta: { title: "Recipe Detail", icon: "international" },
+                component: () => import("@/views/pages/recipe-detail.vue"),
             }
         ]
     },
+    // {
+    // path: "/detail",
+    //     name: "detail",
+    //     redirect: "/detail/recipe_detail",
+    //     meta: { title: "Recipe", icon: "guide" },
+    //     component: Layout,
+    //     children: [
+    //         {
+    //             path: "recipe_detail",
+    //             name: "detail/recipe_detail",
+    //             meta: { title: "Recipe Detail", icon: "international" },
+    //             component: () => import("@/views/pages/recipe-detail.vue"),
+    //         }
+    //     ]
+    // },
     // {
     //     path: "/request",
     //     name: "request",
